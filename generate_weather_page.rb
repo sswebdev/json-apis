@@ -23,17 +23,18 @@ def end_of_page
   return final_part
 end
 
+
 def html_for_city(city_name, current_temp, image)
-  html_fragment = '<div class="col-md-3 chart well">'
-  html_fragment << "<h2>Chicago</h2>"
-  html_fragment << '<p class="temperature">61&deg; F</p>'
+  html = '<div class="col-md-3 chart well">'
+  html << "<h2 class=\"clown\">#{city_name}</h2>"
+  html << '<p class="temperature">' + current_temp.to_s + '&deg; F</p>'
 
   if image != nil
-    html_fragment << '<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/20090524_Buildings_along_Chicago_River_line_the_south_border_of_the_Near_North_Side_and_Streeterville_and_the_north_border_of_Chicago_Loop%2C_Lakeshore_East_and_Illinois_Center.jpg/800px-thumbnail.jpg">'
+    html << "<img src=\"#{image}\">"
   end
 
-  html_fragment << "</div>"
-  return html_fragment
+  html << "</div>"
+  return html
 end
 
 puts start_of_page
