@@ -1,30 +1,28 @@
 require 'open-uri'
+require 'json'
 
 def get_coordinates(city_name)
   # TO DO:
   # Get the latitude and longitude for the given city name.
   # Store the results in an array variable named 'coordinates'.
+  google_maps_url = URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address=#{city_name}&sensor=false")
+  string_data = open(google_maps_url).read
+  data = JSON.parse(string_data)
 
-  # Temporary solution:
-  coordinates = [41.8885694, -87.63552779999999]
+  latitude = data['results'].first['geometry']['location']['lat']
+  longitude = data['results'].first['geometry']['location']['lng']
 
-  # Your code goes here:
-  # ...
+  coordinates = [latitude, longitude]
 
   return coordinates
 end
 
-
 def get_current_temperature(latitude, longitude)
-  # TO DO:
-  # Get the current temperature for the given location.
-  # Store the result in a variable named temp.
+  forecast_url = "https://api.forecast.io/forecast/73caa31d569071a7ef1621e4bc146456/#{latitude},#{longitude}"
+  string_data = open(URI.encode(forecast_url)).read
+  data = JSON.parse(string_data)
 
-  # Temporary solution:
-  temp = 61
-
-  # Your code goes here:
-  # ...
+  temp = data['currently']['temperature']
 
   return temp
 end

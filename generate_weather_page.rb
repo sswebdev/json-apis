@@ -1,7 +1,4 @@
-# 1. Can you figure out how this program currently works?
-#    (Run this program and save the results into a file named weather.html.)
-#
-# 2. Can you fix it so that we can see the weather for all three cities?
+require './weather_api'
 
 def start_of_page
   html = '<!DOCTYPE html>
@@ -24,7 +21,9 @@ def end_of_page
 end
 
 
-def html_for_city(city_name, current_temp, image)
+def html_for_city(city_name, image)
+  coordinates = get_coordinates(city_name)
+  current_temp = get_current_temperature(coordinates.first, coordinates.last)
   html = '<div class="col-md-3 chart well">'
   html << "<h2 class=\"clown\">#{city_name}</h2>"
   html << '<p class="temperature">' + current_temp.to_s + '&deg; F</p>'
@@ -38,7 +37,7 @@ def html_for_city(city_name, current_temp, image)
 end
 
 puts start_of_page
-puts html_for_city("Chicago", 61, 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/20090524_Buildings_along_Chicago_River_line_the_south_border_of_the_Near_North_Side_and_Streeterville_and_the_north_border_of_Chicago_Loop%2C_Lakeshore_East_and_Illinois_Center.jpg/800px-thumbnail.jpg')
-puts html_for_city("Los Angeles", 84, 'http://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Macarthur_Park.jpg/800px-Macarthur_Park.jpg')
-puts html_for_city("Anchorage", 46, 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Anchorage_on_an_April_evening.jpg/800px-Anchorage_on_an_April_evening.jpg')
+puts html_for_city("Chicago",'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/20090524_Buildings_along_Chicago_River_line_the_south_border_of_the_Near_North_Side_and_Streeterville_and_the_north_border_of_Chicago_Loop%2C_Lakeshore_East_and_Illinois_Center.jpg/800px-thumbnail.jpg')
+puts html_for_city("Los Angeles", 'http://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Macarthur_Park.jpg/800px-Macarthur_Park.jpg')
+puts html_for_city("Anchorage", 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Anchorage_on_an_April_evening.jpg/800px-Anchorage_on_an_April_evening.jpg')
 puts end_of_page
