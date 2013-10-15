@@ -2,9 +2,6 @@ require 'open-uri'
 require 'json'
 
 def get_coordinates(city_name)
-  # TO DO:
-  # Get the latitude and longitude for the given city name.
-  # Store the results in an array variable named 'coordinates'.
   google_maps_url = URI.encode("http://maps.googleapis.com/maps/api/geocode/json?address=#{city_name}&sensor=false")
   string_data = open(google_maps_url).read
   data = JSON.parse(string_data)
