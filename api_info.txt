@@ -27,3 +27,11 @@ So the full url would be:
 https://api.forecast.io/forecast/73caa31d569071a7ef1621e4bc146456/41.8885694,-87.63552779999999
 
 More info: https://developer.forecast.io/docs/v2
+
+
+Airport Status API
+--------------------
+http://services.faa.gov/docs/services/airport/
+
+Check out the map at http://www.fly.faa.gov/flyfaa/usmap.jsp
+
