@@ -1,4 +1,9 @@
-require './weather_api'
+# 1. Can you figure out how this program currently works?
+#    (Run this program and save the results into a file named weather.html.)
+#
+# 2. Can you fix it so that we can see the weather for all three cities?
+
+require './weather_api.rb'
 
 def start_of_page
   html = '<!DOCTYPE html>
@@ -20,24 +25,24 @@ def end_of_page
   return final_part
 end
 
-
-def html_for_city(city_name, image)
-  coordinates = get_coordinates(city_name)
-  current_temp = get_current_temperature(coordinates.first, coordinates.last)
-  html = '<div class="col-md-3 chart well">'
-  html << "<h2 class=\"clown\">#{city_name}</h2>"
-  html << '<p class="temperature">' + current_temp.to_s + '&deg; F</p>'
+def html_for_city(city_name, current_temp, image)
+  html_fragment = '<div class="col-md-3 chart well">'
+  html_fragment << "<h2>#{city_name}</h2>"
+  html_fragment << "<p class='temperature'>#{current_temp}&deg; F</p>"
 
   if image != nil
-    html << "<img src=\"#{image}\">"
+    html_fragment << "<img src=\"#{image}\">"
   end
 
-  html << "</div>"
-  return html
+  html_fragment << "</div>"
+  return html_fragment
 end
 
 puts start_of_page
-puts html_for_city("Chicago",'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/20090524_Buildings_along_Chicago_River_line_the_south_border_of_the_Near_North_Side_and_Streeterville_and_the_north_border_of_Chicago_Loop%2C_Lakeshore_East_and_Illinois_Center.jpg/800px-thumbnail.jpg')
-puts html_for_city("Los Angeles", 'http://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Macarthur_Park.jpg/800px-Macarthur_Park.jpg')
-puts html_for_city("Anchorage", 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Anchorage_on_an_April_evening.jpg/800px-Anchorage_on_an_April_evening.jpg')
+
+puts html_for_city("Chicago", get_current_temperature(get_coordinates("Chicago").first, get_coordinates("Chicago").last), 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/20090524_Buildings_along_Chicago_River_line_the_south_border_of_the_Near_North_Side_and_Streeterville_and_the_north_border_of_Chicago_Loop%2C_Lakeshore_East_and_Illinois_Center.jpg/800px-thumbnail.jpg')
+
+
+puts html_for_city("Los Angeles", get_current_temperature(get_coordinates("Los Angeles").first, get_coordinates("Chicago").last), 'http://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Macarthur_Park.jpg/800px-Macarthur_Park.jpg')
+puts html_for_city("Anchorage", get_current_temperature(get_coordinates("Anchorage").first, get_coordinates("Chicago").last), 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Anchorage_on_an_April_evening.jpg/800px-Anchorage_on_an_April_evening.jpg')
 puts end_of_page
